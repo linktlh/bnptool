@@ -17,7 +17,7 @@ setup(
     packages=setuptools.find_packages(),
     entry_points={
         "console_scripts":
-            ['bnptool = bnptool.__main__']
+            ['bnptool = bnptool.__main__:main']
     },
     classifiers=[
         "Development Status :: 3 - Alpha"
@@ -26,6 +26,5 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
     ],
     python_requires=">=3.7",
-    install_requires=['bcml~=3.0.0'],
-    zip_safe=False,
+    install_requires=['bcml>=3.0.0'],
 )
