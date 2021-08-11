@@ -2,7 +2,7 @@
 
 ### Setup
 
-Install a capatible version of python for [BCML](https://github.com/NiceneNerd/BCML/) then run `pip install bnptool`
+Install a compatible version of python for [BCML](https://github.com/NiceneNerd/BCML/) then run `pip install bnptool`
 
 ### Create a BNP 
 
