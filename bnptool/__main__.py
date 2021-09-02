@@ -2,6 +2,8 @@ import argparse
 import os
 import typing
 from bcml.dev import create_bnp_mod
+from bcml.util import TempModContext
+from bcml.install import install_mod, export
 from pathlib import Path
 
 
@@ -61,9 +63,17 @@ def bnp_create(args):
 
     create_bnp_mod(mod=Path(args.mod), output=Path(target_dir), meta=meta, options=options)
 
+def convert_bnp(args):
+
+    target_dir: typing.Optional[str] = args.output
+    if not target_dir:
+        target_dir = os.getcwd() + '\\StandAlone.zip'
+    with TempModContext():
+        install_mod(Path(args.bnp), merge_now=True, options={"options": {"texts": {"all_langs": True}}, "disable": []})
+        export(Path(target_dir))
 
 def main():
-    parser = argparse.ArgumentParser(description='Tool to create BNPs via command line using BCML')
+    parser = argparse.ArgumentParser(description='Tool to create and manage BNPs via command line using BCML')
 
     subparses = parser.add_subparsers(dest='command', help='Command')
     subparses.required = True
@@ -94,6 +104,11 @@ def main():
     c_parser.add_argument('--norstbest', action='store_true', help='Disables estimation for AAMP and BFRES files on RSTB entries. Defaults to false')
     c_parser.add_argument('--mergetextalllang', action='store_true', help='Merges text changes to all languages. the Defaults to false')
     c_parser.set_defaults(func=bnp_create)
+
+    t_parser = subparses.add_parser('convert', description='Convert a BNP to a standalone mod', aliases=['cv'])
+    t_parser.add_argument('bnp', help='Path of the BNP file')
+    t_parser.add_argument('--output', '-o', help="Where to ouput the exported BNP")
+    t_parser.set_defaults(func=convert_bnp)
 
     args = parser.parse_args()
     args.func(args)
