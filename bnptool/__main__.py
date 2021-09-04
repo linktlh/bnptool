@@ -80,7 +80,7 @@ def main():
 
     c_parser = subparses.add_parser('create', description='Create a BNP', aliases=['c'])
     c_parser.add_argument('mod', help='Path of the mod\'s directory or zip')
-    c_parser.add_argument('--output', '-o', help='Filename of the BNP to create')
+    c_parser.add_argument('--output', '-o', help='The path to the BNP file to create')
     c_parser.add_argument('--name', '-n', help='Name of the mod')
     c_parser.add_argument('--version', help='Version of the mod')
     c_parser.add_argument('--description', '-d', help='Description of the mod')
