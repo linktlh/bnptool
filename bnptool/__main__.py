@@ -61,6 +61,12 @@ def bnp_create(args):
     if args.url:
         meta['url'] = args.url
 
+    # Place Holder Args required to create a functional BNP
+    meta['depends'] = {}
+    meta['options'] = {}
+    meta['showCompare'] = False
+    meta['showConvert'] = False
+
     create_bnp_mod(mod=Path(args.mod), output=Path(target_dir), meta=meta, options=options)
 
 def convert_bnp(args):
