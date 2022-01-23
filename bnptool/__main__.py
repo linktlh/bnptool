@@ -1,3 +1,4 @@
+
 import argparse
 import os
 import typing
@@ -54,7 +55,7 @@ def bnp_create(args):
     if not mod_name:
         meta['name'] = 'Unnamed'
     if not target_dir:
-        target_dir = os.getcwd() + '\\' + mod_name + '.bnp'
+        target_dir = os.getcwd() + '\\' + meta['name'] + '.bnp'
     if not mod_version:
         meta['version'] = '1.0.0'
     if args.description:
@@ -95,7 +96,10 @@ def get_version_hash(args):
     hashed_id = urlsafe_b64encode(depend_string.encode('utf-8')).decode('utf-8')
     print('The mod hash ID is: ', hashed_id)
 
-
+def bnp_install(args):
+    print(f'Installing {args.bnp} . . .')
+    install_mod(mod=Path(args.bnp), merge_now=args.remerge)
+        
 def main():
     parser = argparse.ArgumentParser(description='Tool to create and manage BNPs via command line using BCML')
 
@@ -149,6 +153,11 @@ def main():
     h_parser.add_argument('name', help='Name of the mod')
     h_parser.add_argument('version', help='Version of the mod')
     h_parser.set_defaults(func=get_version_hash)
+
+    t_parser = subparses.add_parser('install', description='Installs a BNP.', aliases=['i'])
+    t_parser.add_argument('bnp', help='Path to the BNP file')
+    t_parser.add_argument('--remerge', '-r', action='store_true', help='Remerge all installed mods after installing')
+    t_parser.set_defaults(func=bnp_install)
 
     args = parser.parse_args()
     args.func(args)
