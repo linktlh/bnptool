@@ -56,10 +56,16 @@ def bnp_create(args):
         meta['version'] = '1.0.0'
     if args.description:
         meta['desc'] = args.description
+    else:
+        meta['desc'] = ''
     if args.image:
         meta['image'] = args.image
+    else:
+        meta['image'] = ''
     if args.url:
         meta['url'] = args.url
+    else:
+        meta['url'] = ''
 
     # Place Holder Args required to create a functional BNP
     meta['depends'] = {}
