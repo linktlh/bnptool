@@ -6,7 +6,7 @@ with open("README.md", "r") as readme:
 
 setup(
     name="bnptool",
-    version="1.0.1a",
+    version="1.0.2",
     author="linktlh",
     author_email="linktlh@gmail.com",
     description="A simple Commandline interface to create BNPs using BCML",
